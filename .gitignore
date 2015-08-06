@@ -1,0 +1,10 @@
+# node modules
+node_modules
+
+# caches
+.sass-cache
+.sublime-gulp-cache
+
+
+# exclude merge files
+*.orig

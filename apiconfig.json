@@ -1,0 +1,9 @@
+{
+	"mongoDBServer" : "@localhost",
+	"mongoDBPort"  	: "27017",
+	"mongoDBName" 	: "exerciseApp",
+	"defaultPort" 	: "3010",
+	"accessLogFile" : "logs/access.log",
+	"routerDir" 	: "./routes"
+}
+
