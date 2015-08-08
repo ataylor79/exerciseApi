@@ -1,8 +1,7 @@
 /*jshint node:true*/
 'use strict';
 
-var http 		= require('http'),
-	express 	= require('express'),
+var express 	= require('express'),
 	mongoose 	= require('mongoose'),
 	bodyParser 	= require('body-parser'),
 	fs 			= require('fs'),
@@ -11,10 +10,11 @@ var http 		= require('http'),
 	config 		= require('./apiConfig.json'),
 	app 		= express(),
 	router 		= express.Router(),
-	accessLogStream,
-	server;
+	accessLogStream;
 
-mongoose.connect('mongodb://' + config.mongoDBServer + ':' + config.mongoDBPort + '/' + config.mongoDBName);
+var dbName = (process.env.ENV === 'test') ? config.mongoDBTestName : config.mongoDBName;
+
+mongoose.connect('mongodb://' + config.mongoDBServer + '/' + config.mongoDBTestName);
 
 app.set('port', process.env.PORT || config.defaultPort);
 
@@ -46,7 +46,9 @@ fs.readdir(config.routerDir, function(err, files){
 app.use('/api', router);
 
 // start up server
-server = http.createServer(app);
-server.listen(app.get('port'), function(){
+//server = http.createServer(app);
+app.listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
 });
+
+module.exports = app;

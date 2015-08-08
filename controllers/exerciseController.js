@@ -12,11 +12,16 @@ module.exports = function (Exercise) {
 	var post = function (req, res) {
 		var exercise = new Exercise(req.body);
 
-		exercise.save(function (err) {
-			if (err) { return res.status(500).send(err); }
+		if (!req.body.title) {
+			res.status(400);
+			res.send('Title is required');
+		} else {
+			exercise.save();
+			res.status(201);
+			res.send(exercise);
+		}
 
-			res.status(201).send(exercise);
-		});
+		
 	};
 	/**
 	 * @api {get} /exercise Get list of exercises
@@ -37,9 +42,10 @@ module.exports = function (Exercise) {
 		Exercise.find(query, function (err, exerciseList) {
 			if (err) { res.status(500).send(err); }
 
-			res.json(exerciseList);
+			res.send(exerciseList);
 		});
 	};
+	
 	var getById = function (req, res) {
 		res.json(req.exercise);
 	};
@@ -78,6 +84,9 @@ module.exports = function (Exercise) {
  		});
 	};
 
+	/*
+		Middleware function for put, patch and remove
+	 */
 	var findById = function (req, res, next) {
 		Exercise.findById(req.params.exerciseId, function (err, exercise) {
  			if (err) { 

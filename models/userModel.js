@@ -1,7 +1,7 @@
 /*jshint node:true*/
 var mongoose 	= require('mongoose'),
-	workout 	= require('./workout'),
-	exercise 	= require('./exercise'),
+	workout 	= require('./workoutModel'),
+	exercise 	= require('./exerciseModel'),
 	Schema 		= mongoose.Schema;
 
 var userSchema = new Schema({

@@ -3,7 +3,7 @@
 
 module.exports = function (router) {
 
-	var PerfLog = require('../models/perfLog');
+	var PerfLog = require('../models/perfLogModel');
 
 
 	router.route('/perflog')

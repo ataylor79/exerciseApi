@@ -3,12 +3,12 @@
 
 module.exports = function (router) {
 
-	var Exercise = require('../models/exercise');
-	var exerciseController = require('../controllers/exercise')(Exercise);
+	var Exercise = require('../models/exerciseModel');
+	var exerciseController = require('../controllers/exerciseController')(Exercise);
 	
 	router.route('/exercise')
-		.post(exerciseController.post)
-		.get(exerciseController.get);
+		.post(exerciseController.post) // tested
+		.get(exerciseController.get); // tested
 
 	router.use('/exercise/:exerciseId', exerciseController.findById);
 
