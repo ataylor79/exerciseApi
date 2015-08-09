@@ -6,7 +6,11 @@ module.exports = function (router) {
 	/**
 	 * MongoDB models
 	 */
-	var User = require('../models/userModel');
+	//var User = require('../models/userModel');
+
+	router.route('/user')
+		.post() // tested
+		.get(); // tested
 
 	/*
 	 /user/

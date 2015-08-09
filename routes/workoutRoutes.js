@@ -6,7 +6,7 @@ module.exports = function(router) {
 	/**
 	 * MongoDB models
 	 */
-	var Workout = require('../models/workoutModel');
+	// var Workout = require('../models/workoutModel');
 	/*
 		/workout/
 	 		post (new workout)

@@ -7,7 +7,7 @@ module.exports = function (Exercise) {
 	 * @apiGroup Exercise
 	 * @apiDescription
 	 * 		Add an exercise to the library
-	 * @apiSuccess {String} status ok
+	 * @apiSuccess {String} status 201
 	 */
 	var post = function (req, res) {
 		var exercise = new Exercise(req.body);
@@ -42,6 +42,7 @@ module.exports = function (Exercise) {
 		Exercise.find(query, function (err, exerciseList) {
 			if (err) { res.status(500).send(err); }
 
+			res.status(201);
 			res.send(exerciseList);
 		});
 	};
@@ -49,8 +50,17 @@ module.exports = function (Exercise) {
 	var getById = function (req, res) {
 		res.json(req.exercise);
 	};
+
+	/**
+	 * @api {put} /exercise Overwrite complete existing exercise
+	 * @apiName Exercises
+	 * @apiGroup Exercise
+	 * @apiDescription
+	 * 		Overwrite complete record
+	 * @apiSuccess {String} status 201
+	 */
 	var put = function (req, res) {
-		req.exercise.name 			= req.body.name;
+		req.exercise.title 			= req.body.title;
 		req.exercise.description 	= req.body.description;
 		req.exercise.icon 			= req.body.icon;
 		req.exercise.works 			= req.body.works;
@@ -58,9 +68,18 @@ module.exports = function (Exercise) {
 		req.exercise.save(function (err, exercise) {
 			if (err) { res.status(500).send(err); }
 
+			res.status(201);
 			res.json(exercise);
 		});
 	};
+	/**
+	 * @api {patch} /exercise Overwrite fields in record
+	 * @apiName Exercises
+	 * @apiGroup Exercise
+	 * @apiDescription
+	 * 		Overwrite fields in record
+	 * @apiSuccess {String} status 201
+	 */
 	var patch = function (req, res) {
 		if (req.body._id) { delete req.body.id; }
 
@@ -71,9 +90,19 @@ module.exports = function (Exercise) {
  		req.exercise.save(function (err, exercise) {
 			if (err) { res.status(500).send(err); }
 
+			res.status(201);
 			res.json(exercise);
 		});
 	};
+
+	/**
+	 * @api {delete} /exercise remove record
+	 * @apiName Exercises
+	 * @apiGroup Exercise
+	 * @apiDescription
+	 * 		delete existing record
+	 * @apiSuccess {String} status 204
+	 */
 	var remove = function (req, res) {
 		req.exercise.remove(function (err) {
  			if (err) {

@@ -18,7 +18,7 @@ describe('Exercise controller tests', function () {
 				send: sinon.spy()
 			};
 
-			var exerciseController = require('../../../controllers/exerciseController')(Exercise);
+			var exerciseController = require('../controllers/exerciseController')(Exercise);
 
 			exerciseController.post(req, res);
 			res.status.calledWith(400)

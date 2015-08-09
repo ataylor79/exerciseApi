@@ -1,8 +1,8 @@
 /* jshint node: true */
 var should 		= require('should'),
 	request 	= require('supertest'),
-	app 		= require('../../server.js'),
-	Exercise 	= require('../../models/exerciseModel'),
+	app 		= require('../server.js'),
+	Exercise 	= require('../models/exerciseModel'),
 	agent 		= request.agent(app.listen());
 
 
@@ -34,6 +34,21 @@ describe('CRUD test', function () {
 		      });
 
 	});
+
+	it('should retrieve a single record by ID', function (done) {
+		// save record, get id
+		// request record by id	
+		// 
+		agent
+			.get('/api/exercise/' + exerciseId)
+      		.expect('Content-Type', /json/)
+      		.end(function(err, res){
+		        if (err) return done(err);
+		        done();
+		      });
+	});
+
+
 	
 	afterEach(function (done) {
 		Exercise.remove().exec();
