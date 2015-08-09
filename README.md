@@ -1,6 +1,8 @@
 Exercise App
 ==================================
 
+https://travis-ci.org/ataylor79/exerciseApp.svg?branch=dev
+
 Tech
 ----
  * [MongoDB](https://www.mongodb.org/)
