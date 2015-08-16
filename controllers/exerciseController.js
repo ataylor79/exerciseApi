@@ -16,9 +16,12 @@ module.exports = function (Exercise) {
 			res.status(400);
 			res.send('Title is required');
 		} else {
-			exercise.save();
-			res.status(201);
-			res.send(exercise);
+			exercise.save(function (err, exercise) {
+				if (err) { res.status(500).send(err); }
+
+				res.status(201);
+				res.send(exercise);
+			});
 		}
 
 		
@@ -35,8 +38,8 @@ module.exports = function (Exercise) {
 
 		var query = {};
 
-		if (req.query.name) {
-			query.name = req.query.name;
+		if (req.query.title) {
+			query.title = req.query.title;
 		}
 
 		Exercise.find(query, function (err, exerciseList) {
@@ -108,7 +111,8 @@ module.exports = function (Exercise) {
  			if (err) {
  				res.status(500).send(err);
  			} else {
- 				res.status(204).send('Exercise removed');
+ 				res.status(204);
+ 				res.json({status : 'Exercise removed'});
  			}
  		});
 	};
@@ -124,7 +128,7 @@ module.exports = function (Exercise) {
  				req.exercise = exercise;
  				next();
  			} else {
- 				res.status(404).send('Exercise not found');
+ 				res.status(404).send({status: 'Exercise not found'});
  			}
  		});
 	};
