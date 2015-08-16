@@ -1,7 +1,8 @@
 /*jshint node:true*/
 'use strict';
 
-var express 	= require('express'),
+var http 		= require('http'),
+	express 	= require('express'),
 	mongoose 	= require('mongoose'),
 	bodyParser 	= require('body-parser'),
 	fs 			= require('fs'),
@@ -9,7 +10,8 @@ var express 	= require('express'),
 	morgan 		= require('morgan'),
 	app 		= express(),
 	router 		= express.Router(),
-	accessLogStream;
+	accessLogStream,
+	server;
 
 var config = {
 	mongoDBServer 	: '@localhost',
@@ -51,13 +53,13 @@ fs.readdir(config.routerDir, function(err, files){
  });
 
 // register routes
-//app.use('/apiDoc', express.static(__dirname + '/apiDoc'));
+app.use('/apiDoc', express.static(__dirname + '/apiDoc'));
 app.use('/api', router);
 
 // start up server
-//server = http.createServer(app);
-app.listen(app.get('port'), function(){
+server = http.createServer(app);
+server.listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
 });
 
-module.exports = app;
+module.exports = server;

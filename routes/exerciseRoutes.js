@@ -7,8 +7,8 @@ module.exports = function (router) {
 	var exerciseController = require('../controllers/exerciseController')(Exercise);
 	
 	router.route('/exercise')
-		.post(exerciseController.post) // tested
-		.get(exerciseController.get); // tested
+		.post(exerciseController.post)
+		.get(exerciseController.get);
 
 	router.use('/exercise/:exerciseId', exerciseController.findById);
 

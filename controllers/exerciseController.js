@@ -2,9 +2,9 @@
 module.exports = function (Exercise) {
 	'use strict';
 	/**
-	 * @api {post} /exercise Upload a new exercise
-	 * @apiName Exercises
-	 * @apiGroup Exercise
+	 * @api {post} /api/exercise Upload a new exercise
+	 * @apiName Add an exercise
+	 * @apiGroup Exercises
 	 * @apiDescription
 	 * 		Add an exercise to the library
 	 * @apiSuccess {String} status 201
@@ -23,12 +23,10 @@ module.exports = function (Exercise) {
 				res.send(exercise);
 			});
 		}
-
-		
 	};
 	/**
-	 * @api {get} /exercise Get list of exercises
-	 * @apiName Exercises
+	 * @api {get} /api/exercise Get list of exercises
+	 * @apiName Get a list of exercises
 	 * @apiGroup Exercises
 	 * @apiDescription
 	 * 		Get list of stored exercises
@@ -49,17 +47,11 @@ module.exports = function (Exercise) {
 			res.send(exerciseList);
 		});
 	};
-	
-	var getById = function (req, res) {
-		res.json(req.exercise);
-	};
-
 	/**
-	 * @api {put} /exercise Overwrite complete existing exercise
-	 * @apiName Exercises
-	 * @apiGroup Exercise
-	 * @apiDescription
-	 * 		Overwrite complete record
+	 * @api {put} /api/exercise/{exerciseId} Overwrite complete existing exercise
+	 * @apiName Overwrite an exercise
+	 * @apiGroup Exercises
+	 * @apiParam {Number} id exercise unique ID.
 	 * @apiSuccess {String} status 201
 	 */
 	var put = function (req, res) {
@@ -76,9 +68,9 @@ module.exports = function (Exercise) {
 		});
 	};
 	/**
-	 * @api {patch} /exercise Overwrite fields in record
-	 * @apiName Exercises
-	 * @apiGroup Exercise
+	 * @api {patch} /api/exercise Overwrite fields in record
+	 * @apiName update an exercise
+	 * @apiGroup Exercises
 	 * @apiDescription
 	 * 		Overwrite fields in record
 	 * @apiSuccess {String} status 201
@@ -99,9 +91,10 @@ module.exports = function (Exercise) {
 	};
 
 	/**
-	 * @api {delete} /exercise remove record
-	 * @apiName Exercises
-	 * @apiGroup Exercise
+	 * @api {delete} /api/exercise/{exerciseId} remove record
+	 * @apiName delete an exercise
+	 * @apiGroup Exercises
+	 * @apiParam {Number} id exercise unique ID.
 	 * @apiDescription
 	 * 		delete existing record
 	 * @apiSuccess {String} status 204
@@ -117,6 +110,9 @@ module.exports = function (Exercise) {
  		});
 	};
 
+	var getById = function (req, res) {
+		res.json(req.exercise);
+	};
 	/*
 		Middleware function for put, patch and remove
 	 */

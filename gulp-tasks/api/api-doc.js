@@ -3,7 +3,7 @@ var $      		= require('gulp-load-plugins')();
 
 gulp.task('build-apiDoc', function () {
 	$.apidoc.exec({
-		src: 'routes',
+		src: 'controllers',
 		dest: 'apiDoc/'
 	});
 });
