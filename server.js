@@ -23,9 +23,9 @@ var config = {
 	routerDir 		: './routes'
 };
 
-var dbName = (process.env.ENV === 'test') ? config.mongoDBTestName : config.mongoDBName;
+var dbName = (process.env.NODE_ENV === 'test') ? config.mongoDBTestName : config.mongoDBName;
 
-mongoose.connect('mongodb://' + config.mongoDBServer + '/' + config.mongoDBTestName);
+mongoose.connect('mongodb://' + config.mongoDBServer + '/' + dbName);
 
 app.set('port', process.env.PORT || config.defaultPort);
 
