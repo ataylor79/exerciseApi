@@ -1,7 +1,7 @@
 Exercise App
 ==================================
 
-[![Build Status](https://travis-ci.org/ataylor79/exerciseApp.svg?branch=dev)](https://travis-ci.org/ataylor79/exerciseApp)
+[![Build Status](https://travis-ci.org/ataylor79/exerciseApi.svg?branch=dev)](https://travis-ci.org/ataylor79/exerciseApi)
 
 Tech
 ----
