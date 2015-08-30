@@ -55,12 +55,12 @@ module.exports = function (Exercise) {
 	 * @apiSuccess {String} status 201
 	 */
 	var put = function (req, res) {
-		req.exercise.title 			= req.body.title;
-		req.exercise.description 	= req.body.description;
-		req.exercise.icon 			= req.body.icon;
-		req.exercise.works 			= req.body.works;
+		req.result.title 			= req.body.title;
+		req.result.description 		= req.body.description;
+		req.result.icon 			= req.body.icon;
+		req.result.works 			= req.body.works;
 
-		req.exercise.save(function (err, exercise) {
+		req.result.save(function (err, exercise) {
 			if (err) { res.status(500).send(err); }
 
 			res.status(201);
@@ -79,10 +79,10 @@ module.exports = function (Exercise) {
 		if (req.body._id) { delete req.body.id; }
 
  		for (var prop in req.body) {
- 			req.exercise[prop] = req.body[prop];
+ 			req.result[prop] = req.body[prop];
  		}
 
- 		req.exercise.save(function (err, exercise) {
+ 		req.result.save(function (err, exercise) {
 			if (err) { res.status(500).send(err); }
 
 			res.status(201);
@@ -100,7 +100,7 @@ module.exports = function (Exercise) {
 	 * @apiSuccess {String} status 204
 	 */
 	var remove = function (req, res) {
-		req.exercise.remove(function (err) {
+		req.result.remove(function (err) {
  			if (err) {
  				res.status(500).send(err);
  			} else {
@@ -111,22 +111,7 @@ module.exports = function (Exercise) {
 	};
 
 	var getById = function (req, res) {
-		res.json(req.exercise);
-	};
-	/*
-		Middleware function for put, patch and remove
-	 */
-	var findById = function (req, res, next) {
-		Exercise.findById(req.params.exerciseId, function (err, exercise) {
- 			if (err) { 
- 				res.status(500).send(err); 
- 			} else if (exercise) {
- 				req.exercise = exercise;
- 				next();
- 			} else {
- 				res.status(404).send({status: 'Exercise not found'});
- 			}
- 		});
+		res.json(req.result);
 	};
 
 	return {
@@ -135,7 +120,6 @@ module.exports = function (Exercise) {
 		getById: getById,
 		put: put,
 		patch: patch,
-		remove: remove,
-		findById: findById
+		remove: remove
 	};
 };

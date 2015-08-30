@@ -6,16 +6,20 @@ module.exports = function (router) {
 	/**
 	 * MongoDB models
 	 */
-	//var User = require('../models/userModel');
+	var UserModel = require('../models/userModel');
+	var userController = require('../controllers/userController')(UserModel.user);
+	var userMiddleware = require('../middleware/commonMiddleware')(UserModel.user);
 
 	router.route('/user')
-		.post() // tested
-		.get(); // tested
+		.post(userController.post)
+		.get(userController.get); 
+
+	router.use('/user/:recordId', userMiddleware.findById);
+
+	router.route('/user/:recordId')
+		.get(userController.getById);
 
 	/*
-	 /user/
-	 	post (new user)
-	 	get (list of users)
 	 /user/:userId
 	 	get (user)
 	 	put (update user)

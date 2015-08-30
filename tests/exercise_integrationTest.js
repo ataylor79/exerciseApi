@@ -6,7 +6,7 @@ var should 		= require('should'),
 	agent 		= request.agent(app.listen());
 
 
-describe('CRUD test', function () {
+describe('Exercise CRUD tests', function () {
 	'use strict';
 
 	var id;
