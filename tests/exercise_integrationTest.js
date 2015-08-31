@@ -19,6 +19,7 @@ describe('Exercise CRUD tests', function () {
 			.send(exercisePost)
 			.expect(201)
 			.end(function (err, results) {
+				console.log('posted', err, results);
 				results.body.should.have.property('_id');
 				id = results.body._id;
 				done();
