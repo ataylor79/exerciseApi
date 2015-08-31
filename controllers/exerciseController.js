@@ -11,14 +11,12 @@ module.exports = function (Exercise) {
 	 */
 	var post = function (req, res) {
 		var exercise = new Exercise(req.body);
-		console.log('Exercise', exercise);
-
+		
 		if (!req.body.title) {
 			res.status(400);
 			res.send('Title is required');
 		} else {
 			exercise.save(function (err, exercise) {
-				console.log(err, exercise);
 				if (err) { res.status(500).send(err); }
 
 				res.status(201);

@@ -11,7 +11,6 @@
     "errorhandler": "^1.3.5",
     "express": "^4.12.3",
     "express-session": "^1.11.1",
-    "gulp-apidoc": "^0.1.5",
     "jshint": "^2.8.0",
     "jshint-stylish": "^2.0.1",
     "method-override": "^2.3.2",
@@ -27,7 +26,7 @@
   "scripts": {
     "start": "node server.js",
     "test": "mocha tests/*.js",
-    "lint": "jshint --reporter=node_modules/jshint-stylish controllers/ models/ routes/"
+    "lint": "jshint --reporter=node_modules/jshint-stylish controllers/ middleware/ models/ routes/"
   },
   "bugs": {
     "url": "https://github.com/ataylor79/exerciseApi/issues"
@@ -36,8 +35,8 @@
   "main": "server.js",
   "devDependencies": {
     "gulp": "^3.9.0",
-    "gulp-env": "^0.2.0",
     "gulp-load-plugins": "^1.0.0-rc.1",
+    "gulp-apidoc": "^0.1.5",
     "gulp-nodemon": "^2.0.3",
     "require-dir": "^0.3.0",
     "supertest": "^1.0.1"
