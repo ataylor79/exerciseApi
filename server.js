@@ -25,8 +25,6 @@ var config = {
 
 var dbName = (process.env.NODE_ENV === 'test') ? config.mongoDBTestName : config.mongoDBName;
 
-console.log(process.env.NODE_ENV)
-
 mongoose.connect('mongodb://' + config.mongoDBServer + '/' + dbName);
 
 app.set('port', process.env.PORT || config.defaultPort);
