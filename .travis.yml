@@ -9,6 +9,3 @@ services:
 
 before_install: 
   - npm install mocha jshint -g
-
-env:
-  - NODE_ENV="test"
