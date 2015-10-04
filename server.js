@@ -9,21 +9,14 @@ var express 	= require('express'),
 	morgan 		= require('morgan'),
 	app 		= express(),
 	router 		= express.Router(),
+	config		= require('./apiconfig.json'),
 	accessLogStream;
 
-var config = {
-	mongoDBServer 	: '@localhost',
-	mongoDBPort  	: '27017',
-	mongoDBName 	: 'exerciseApp',
-	mongoDBTestName : 'exerciseApp_Test',
-	defaultPort 	: '8000',
-	accessLogFile 	: 'logs/access.log',
-	routerDir 		: './routes'
-};
+var db = (process.env.NODE_ENV === 'test') ? config.test.mongoDB : config.prod.mongoDB;
 
-var dbName = (process.env.NODE_ENV === 'test') ? config.mongoDBTestName : config.mongoDBName;
+console.log('mongodb://' + db.user + ':'  + db.password + '@' + db.server + ':' + db.port +  '/' + db.name);
 
-mongoose.connect('mongodb://' + config.mongoDBServer + '/' + dbName);
+mongoose.connect('mongodb://' + db.user + ':'  + db.password + '@' + db.server + ':' + db.port +  '/' + db.name);
 
 app.set('port', process.env.PORT || config.defaultPort);
 

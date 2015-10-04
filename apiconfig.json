@@ -1,10 +1,26 @@
 {
-	"mongoDBServer" 	: "@localhost",
-	"mongoDBPort"  		: "27017",
-	"mongoDBName" 		: "exerciseApp",
-	"mongoDBTestName" 	: "exerciseApp_Test",
-	"defaultPort" 		: "8000",
-	"accessLogFile" 	: "logs/access.log",
-	"routerDir" 		: "./routes"
+	"test": {
+		"mongoDB" : {
+			"user"		: "testUser",
+			"password" 	: "password1",
+			"name"		: "stats-test",
+			"server" 	: "ds055852.mongolab.com",
+			"port"  	: "55852"
+		}
+
+	},
+	"prod": {
+		"mongoDB": {
+			"user"		: "testUser",
+			"password" 	: "password1",
+			"name" 		: "stats",
+			"server" 	: "ds055852.mongolab.com",
+			"port"  	: "55852"
+		}
+	},
+	
+	"defaultPort" 	: "8000",
+	"accessLogFile" : "logs/access.log",
+	"routerDir" 	: "./routes"
 }
 
