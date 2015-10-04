@@ -20,7 +20,7 @@
 	},
 	
 	"defaultPort" 	: "8000",
-	"accessLogFile" : "logs/access.log",
+	"accessLogFile" : "./logs/access.log",
 	"routerDir" 	: "./routes"
 }
 
