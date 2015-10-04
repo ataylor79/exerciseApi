@@ -18,6 +18,10 @@ console.log('mongodb://' + db.user + ':'  + db.password + '@' + db.server + ':' 
 
 mongoose.connect('mongodb://' + db.user + ':'  + db.password + '@' + db.server + ':' + db.port +  '/' + db.name);
 
+var conn = mongoose.connection;             
+ 
+conn.on('error', console.error.bind(console, 'connection error:'));  
+
 app.set('port', process.env.PORT || config.defaultPort);
 
 // use body parser to extract params from the req body
