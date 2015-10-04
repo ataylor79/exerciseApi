@@ -10,9 +10,10 @@ var express 	= require('express'),
 	app 		= express(),
 	router 		= express.Router(),
 	config		= require('./apiconfig.json'),
+	isTest 		= (process.env.NODE_ENV === 'test') ? true : false,
 	accessLogStream;
 
-var db = (process.env.NODE_ENV === 'test') ? config.test.mongoDB : config.prod.mongoDB;
+var db = (isTest) ? config.test.mongoDB : config.prod.mongoDB;
 
 console.log('mongodb://' + db.user + ':'  + db.password + '@' + db.server + ':' + db.port +  '/' + db.name);
 
@@ -28,15 +29,20 @@ app.set('port', process.env.PORT || config.defaultPort);
 app.use(bodyParser.urlencoded({ extended: true}));
 app.use(bodyParser.json());
 
-//Access logging - oh yeahhh
-//create a write stream (in append mode)
-accessLogStream = fs.createWriteStream(config.accessLogFile, {flags: 'a'});
 
-// setup the logger
-app.use(morgan('combined', {
-	skip: function () { return process.env.NODE_ENV === 'test'; },
-	stream: accessLogStream
-}));
+if (!isTest) {
+
+	//Access logging - oh yeahhh
+	//create a write stream (in append mode)
+	accessLogStream = fs.createWriteStream(config.accessLogFile, {flags: 'a'});
+
+	// setup the logger
+	app.use(morgan('combined', {
+		skip: function (req) { return req.get('host') === 'localhost:' + app.get('port'); },
+		stream: accessLogStream
+	}));
+
+}
 
 // add router files
 fs.readdir(config.routerDir, function(err, files){
