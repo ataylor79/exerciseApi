@@ -6,11 +6,11 @@ var express 	= require('express'),
 	bodyParser 	= require('body-parser'),
 	fs 			= require('fs'),
 	path 		= require('path'),
-	//morgan 		= require('morgan'),
+	morgan 		= require('morgan'),
 	app 		= express(),
 	router 		= express.Router(),
-	config		= require('./apiconfig.json');
-	//accessLogStream;
+	config		= require('./apiconfig.json'),
+	accessLogStream;
 
 var db = (process.env.NODE_ENV === 'test') ? config.test.mongoDB : config.prod.mongoDB;
 
@@ -28,15 +28,15 @@ app.set('port', process.env.PORT || config.defaultPort);
 app.use(bodyParser.urlencoded({ extended: true}));
 app.use(bodyParser.json());
 
-// Access logging - oh yeahhh
-// create a write stream (in append mode)
-// accessLogStream = fs.createWriteStream(config.accessLogFile, {flags: 'a'});
+//Access logging - oh yeahhh
+//create a write stream (in append mode)
+accessLogStream = fs.createWriteStream(config.accessLogFile, {flags: 'a'});
 
-// // setup the logger
-// app.use(morgan('combined', {
-// 	skip: function (req) { return req.get('host') === 'localhost:' + app.get('port'); },
-// 	stream: accessLogStream
-// }));
+// setup the logger
+app.use(morgan('combined', {
+	skip: function () { return process.env.NODE_ENV === 'test'; },
+	stream: accessLogStream
+}));
 
 // add router files
 fs.readdir(config.routerDir, function(err, files){
