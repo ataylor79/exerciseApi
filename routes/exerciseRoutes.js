@@ -5,7 +5,7 @@ module.exports = function (router) {
 
 	var Exercise = require('../models/exerciseModel');
 	var exerciseController = require('../controllers/exerciseController')(Exercise);
-	var exerciseMiddleware = require('../middleware/CommonMiddleware')(Exercise);
+	var exerciseMiddleware = require('../middleware/commonMiddleware')(Exercise);
 	
 	router.route('/exercise')
 		.post(exerciseController.post)
