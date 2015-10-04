@@ -4,8 +4,8 @@
 			"user"		: "testUser",
 			"password" 	: "password1",
 			"name"		: "stats-test",
-			"server" 	: "ds055852.mongolab.com",
-			"port"  	: "55852"
+			"server" 	: "ds029454.mongolab.com",
+			"port"  	: "29454"
 		}
 
 	},
@@ -23,4 +23,3 @@
 	"accessLogFile" : "./logs/access.log",
 	"routerDir" 	: "./routes"
 }
-
