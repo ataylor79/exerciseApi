@@ -1,12 +1,9 @@
-sudo: required
+sudo: false
 language: node_js
 node_js:
   - "0.12"
   - "0.11"
   - "0.10"
-
-services:
-  - mongodb
 
 before_install: 
   - npm install mocha jshint -g
