@@ -45,6 +45,7 @@ app.use(bodyParser.json());
 
 // }
 
+
 // add router files
 fs.readdir(config.routerDir, function(err, files){
 	if(err) { throw err; }
