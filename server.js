@@ -24,6 +24,8 @@ mongoose.connect('mongodb://' + db.user + ':'  + db.password + '@' + db.server +
 
 var conn = mongoose.connection;
 
+conn.on('connecting', function () { console.log('connecting to mongoDB')})
+conn.on('connected', function () { console.log('connected to mongoDB')})
 conn.on('error', console.error.bind(console, 'connection error:'));
 
 app.set('port', process.env.PORT || config.defaultPort);
