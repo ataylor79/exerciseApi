@@ -1,9 +1,9 @@
 /* jshint node: true */
 var should 		= require('should'),
-	request 	= require('supertest'),
-	app 		= require('../server.js'),
-	Exercise 	= require('../models/exerciseModel'),
-	agent 		= request.agent(app.listen());
+		request 	= require('supertest'),
+		app 		= require('../server.js'),
+		Exercise 	= require('../models/exerciseModel'),
+		agent 		= request.agent(app.listen());
 
 
 describe('Exercise CRUD tests', function () {
@@ -13,7 +13,7 @@ describe('Exercise CRUD tests', function () {
 
 	it('should allow an exercise to be posted and return an _id', function (done) {
 
-		var exercisePost = {title: 'press-up', description: 'Push up'};
+		var exercisePost = {"title": "press-up", "description": "Push up"};
 
 		agent.post('/api/exercise')
 			.send(exercisePost)
@@ -39,7 +39,7 @@ describe('Exercise CRUD tests', function () {
 	});
 
 	it('should get a single record by ID', function (done) {
-		
+
 		agent
 			.get('/api/exercise/' + id)
 	  		.expect('Content-Type', /json/)
@@ -104,7 +104,7 @@ describe('Exercise CRUD tests', function () {
       			results.body.should.have.property('works');
       			results.body.should.have.property('works').with.lengthOf(2);
       			done();
-      		});	
+      		});
 	});
 
 	it('should delete a record', function (done) {
@@ -118,7 +118,7 @@ describe('Exercise CRUD tests', function () {
 				done();
 			});
 	});
-	
+
 	after(function (done) {
 		Exercise.remove().exec();
 		done();

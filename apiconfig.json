@@ -1,21 +1,21 @@
 {
+	"dev": {
+		"mongoDB" : {
+			"user"			: "devUser",
+			"password" 	: "password",
+			"name"			: "exerciseApp",
+			"server" 		: "localhost",
+			"port"  		: "27017"
+		}
+	},
+
 	"test": {
 		"mongoDB" : {
-			"user"		: "testUser",
-			"password" 	: "password1",
-			"name"		: "stats-test",
-			"server" 	: "ds029454.mongolab.com",
-			"port"  	: "29454"
-		}
-
-	},
-	"prod": {
-		"mongoDB": {
-			"user"		: "testUser",
-			"password" 	: "password1",
-			"name" 		: "stats",
-			"server" 	: "ds055852.mongolab.com",
-			"port"  	: "55852"
+			"user"			: "testUser",
+			"password" 	: "password",
+			"name"			: "exerciseApp_Test",
+			"server" 		: "localhost",
+			"port"  		: "27017"
 		}
 	},
 

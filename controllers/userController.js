@@ -12,19 +12,12 @@ module.exports = function (User) {
 	var post = function (req, res) {
 		var user = new User(req.body);
 
-		console.log(req.body);
+		user.save(function (err, user) {
+			if (err) { res.status(500).send(err); }
 
-		// if (!req.body.firstName || !req.body.lastName) {
-		// 	res.status(400);
-		// 	res.send('First and last name are required');
-		// } else {
-			user.save(function (err, user) {
-				if (err) { res.status(500).send(err); }
-
-				res.status(201);
-				res.send(user);
-			});
-		//}
+			res.status(201);
+			res.send(user);
+		});
 	};
 	/**
 	 * @api {get} /api/user Get list of users

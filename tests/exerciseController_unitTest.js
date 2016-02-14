@@ -1,6 +1,6 @@
 /* jshint node:true */
 var should 	= require('should'),
-	sinon 	= require('sinon');
+		sinon 	= require('sinon');
 
 describe('Exercise controller tests', function () {
 	describe('Post', function () {

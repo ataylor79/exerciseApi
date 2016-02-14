@@ -14,7 +14,7 @@ var express 		= require('express'),
 	isDev 				= (env === 'dev') ? true : false,
 	accessLogStream;
 
-var db = (isDev) ? config.test.mongoDB : config.prod.mongoDB;
+var db = (isDev) ? config.dev.mongoDB : config.test.mongoDB;
 
 mongoose.connect('mongodb://' + db.user + ':'  + db.password + '@' + db.server + ':' + db.port +  '/' + db.name);
 

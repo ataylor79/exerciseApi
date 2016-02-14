@@ -12,3 +12,6 @@ node_modules
 # project files
 *.sublime-project
 *.sublime-workspace
+
+#logs
+*.log
