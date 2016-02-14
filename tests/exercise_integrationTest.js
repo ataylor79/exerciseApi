@@ -26,7 +26,6 @@ describe('Exercise CRUD tests', function () {
 	});
 
 	it('should get all exercise records', function (done) {
-
 		agent
 			.get('/api/exercise')
       		.expect('Content-Type', /json/)
@@ -35,11 +34,9 @@ describe('Exercise CRUD tests', function () {
 		        if (err) return done(err);
 		        done();
 		      });
-
 	});
 
 	it('should get a single record by ID', function (done) {
-
 		agent
 			.get('/api/exercise/' + id)
 	  		.expect('Content-Type', /json/)
@@ -50,7 +47,6 @@ describe('Exercise CRUD tests', function () {
 		        results.body.should.have.property('title', 'press-up');
 		        done();
 		      });
-
 	});
 
 	it('should get records as per query string', function (done) {
@@ -117,6 +113,11 @@ describe('Exercise CRUD tests', function () {
 
 				done();
 			});
+	});
+
+	afterEach(function (done) {
+		console.log('user id', id);
+		done();
 	});
 
 	after(function (done) {

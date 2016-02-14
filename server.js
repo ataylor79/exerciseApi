@@ -16,6 +16,8 @@ var express 		= require('express'),
 
 var db = (isDev) ? config.dev.mongoDB : config.test.mongoDB;
 
+console.log('mongodb://' + db.user + ':'  + db.password + '@' + db.server + ':' + db.port +  '/' + db.name);
+
 mongoose.connect('mongodb://' + db.user + ':'  + db.password + '@' + db.server + ':' + db.port +  '/' + db.name);
 
 var conn = mongoose.connection;
@@ -29,19 +31,19 @@ app.use(bodyParser.urlencoded({ extended: true}));
 app.use(bodyParser.json());
 
 
-if (!isDev) {
+// if (!isDev) {
 
-	//Access logging - oh yeahhh
-	//create a write stream (in append mode)
-	accessLogStream = fs.createWriteStream(config.accessLogFile, {flags: 'a'});
+// 	//Access logging - oh yeahhh
+// 	//create a write stream (in append mode)
+// 	accessLogStream = fs.createWriteStream(config.accessLogFile, {flags: 'a'});
 
-	// setup the logger
-	app.use(morgan('combined', {
-		skip: function (req) { return req.get('host') === 'localhost:' + app.get('port'); },
-		stream: accessLogStream
-	}));
+// 	// setup the logger
+// 	app.use(morgan('combined', {
+// 		skip: function (req) { return req.get('host') === 'localhost:' + app.get('port'); },
+// 		stream: accessLogStream
+// 	}));
 
-}
+// }
 
 // add router files
 fs.readdir(config.routerDir, function(err, files){

@@ -29,7 +29,7 @@
   "scripts": {
   	"start"					: "nodemon server.js",
   	"start:localdb"	: "C:/mongodb/bin/mongod.exe --config C:/mongodb/config/mongod.conf",
-    "test"					: "set NODE_ENV='test' && mocha tests/*.js",
+    "test"					: "mocha tests/*.js",
     "linting"				: "jshint --reporter=node_modules/jshint-stylish controllers/ middleware/ models/ routes/",
     "update:apiDoc" : "apidoc -i controllers/ -o apiDoc/"
   },
