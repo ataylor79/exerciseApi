@@ -4,19 +4,19 @@ var mongoose 	= require('mongoose'),
 	exercise 	= require('./exerciseModel'),
 	Schema 		= mongoose.Schema;
 
-var userSchema = new Schema({
-	firstName: { type: String, required: true },
-	lastName: { type: String, required: true },
-	dob: Date,
-	startDate: { type: Date, default: Date.now }
-}, {collection: 'users'});
-
 var statSchema = new Schema({
 	userID: Schema.Types.ObjectId,
 	date: { type: Date, default: Date.now },
 	weight: Number,
 	measures: { leg: Number, waist: Number, hip: Number, chest: Number, arm: Number }
 }, {collection: 'stats'});
+
+var userSchema = new Schema({
+	firstName: { type: String, required: true },
+	lastName: { type: String, required: true },
+	dob: { type: Date, required: true},
+	startDate: { type: Date, default: Date.now }
+}, {collection: 'users'});
 
 var userWorkoutSchema = new Schema({
 	userId: Schema.Types.ObjectId,

@@ -3,9 +3,9 @@ module.exports = function (Model) {
 	'use strict';
 
 	var findById = function (req, res, next) {
-		Model.findById(req.params.recordId, function (err, result) {
- 			if (err) {  
- 				res.status(500).send(err); 
+		Model.findById(req.params._id, function (err, result) {
+ 			if (err) {
+ 				res.status(500).send(err);
  			} else if (result) {
  				req.result = result;
  				next();

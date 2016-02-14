@@ -1,27 +1,26 @@
 /*jshint node:true*/
 'use strict';
 
-var express 	= require('express'),
-	mongoose 	= require('mongoose'),
-	bodyParser 	= require('body-parser'),
-	fs 			= require('fs'),
-	path 		= require('path'),
-	morgan 		= require('morgan'),
-	app 		= express(),
-	router 		= express.Router(),
-	config		= require('./apiconfig.json'),
-	isTest 		= (process.env.NODE_ENV === 'test') ? true : false,
+var express 		= require('express'),
+	mongoose 			= require('mongoose'),
+	bodyParser 		= require('body-parser'),
+	fs 						= require('fs'),
+	path 					= require('path'),
+	morgan 				= require('morgan'),
+	app 					= express(),
+	router 				= express.Router(),
+	config				= require('./apiconfig.json'),
+	env 					= process.env.NODE_ENV || 'dev',
+	isDev 				= (env === 'dev') ? true : false,
 	accessLogStream;
 
-var db = (isTest) ? config.test.mongoDB : config.prod.mongoDB;
-
-console.log('mongodb://' + db.user + ':'  + db.password + '@' + db.server + ':' + db.port +  '/' + db.name);
+var db = (isDev) ? config.test.mongoDB : config.prod.mongoDB;
 
 mongoose.connect('mongodb://' + db.user + ':'  + db.password + '@' + db.server + ':' + db.port +  '/' + db.name);
 
-var conn = mongoose.connection;             
- 
-conn.on('error', console.error.bind(console, 'connection error:'));  
+var conn = mongoose.connection;
+
+conn.on('error', console.error.bind(console, 'connection error:'));
 
 app.set('port', process.env.PORT || config.defaultPort);
 
@@ -30,7 +29,7 @@ app.use(bodyParser.urlencoded({ extended: true}));
 app.use(bodyParser.json());
 
 
-if (!isTest) {
+if (!isDev) {
 
 	//Access logging - oh yeahhh
 	//create a write stream (in append mode)
@@ -53,13 +52,23 @@ fs.readdir(config.routerDir, function(err, files){
 	});
  });
 
+if (isDev) {
+	app.all('/*', function(req, res, next) {
+	  res.header("Access-Control-Allow-Origin", "*");
+	  res.header("Access-Control-Allow-Headers", "X-Requested-With, Content-Type");
+	  next();
+	});
+}
+
+
 // register routes
 app.use('/apiDoc', express.static(__dirname + '/apiDoc'));
 app.use('/api', router);
 
+
 // start up server
 app.listen(app.get('port'), function(){
-  console.log('Express server listening on port ' + app.get('port'));
+  console.log('Express server(' + env + ') listening on port ' + app.get('port'));
 });
 
 module.exports = app;

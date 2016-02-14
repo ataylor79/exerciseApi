@@ -7,27 +7,30 @@ module.exports = function (router) {
 	 * MongoDB models
 	 */
 	var UserModel = require('../models/userModel');
-	var userController = require('../controllers/userController')(UserModel.user);
-	var userMiddleware = require('../middleware/commonMiddleware')(UserModel.user);
+	var User = UserModel.user;
+	var Stats = UserModel.userStats;
+	var userController = require('../controllers/userController')(User);
+	var statsController = require('../controllers/statsController')(Stats);
+	var userMiddleware = require('../middleware/commonMiddleware')(User);
 
 	router.route('/user')
 		.post(userController.post)
-		.get(userController.get); 
+		.get(userController.get);
 
-	router.use('/user/:recordId', userMiddleware.findById);
+	router.use('/user/:_id', userMiddleware.findById);
 
-	router.route('/user/:recordId')
-		.get(userController.getById);
+	router.route('/user/:_id')
+		.get(userController.getById)
+		.put(userController.put)
+		.patch(userController.patch)
+		.delete(userController.remove);
 
-	/*
-	 /user/:userId
-	 	get (user)
-	 	put (update user)
-	 	delete (user)
-	 /user/:userId/stats/
-		post (new user stats)
-	 	get (user list of stats)
-	 /user/:userId/stats/:statId
+	router.route('/user/:_id/stats')
+		.post(statsController.post)
+		.get(statsController.get);
+
+
+	/* /user/:userId/stats/:statName
 	 	get (user stats)
 	 	put (update user stats)
 	 	delete (users stats)

@@ -1,56 +1,42 @@
 /* jshint node:true */
-module.exports = function (User) {
+module.exports = function (Stats) {
 	'use strict';
 	/**
-	 * @api {post} /api/user Save a new user
-	 * @apiName Add an user
-	 * @apiGroup Users
+	 * @api {post} /api/user/{UserId}/stats Save a users stats
+	 * @apiName Add stats per user id
+	 * @apiGroup Stats
 	 * @apiDescription
-	 * 		Add a user to the records
+	 * 		Add a set of stats
 	 * @apiSuccess {String} status 201
 	 */
 	var post = function (req, res) {
-		var user = new User(req.body);
+		var stats = new Stats(req.body);
 
-		console.log(req.body);
+		stats.userID = req.params._id;
 
-		// if (!req.body.firstName || !req.body.lastName) {
-		// 	res.status(400);
-		// 	res.send('First and last name are required');
-		// } else {
-			user.save(function (err, user) {
-				if (err) { res.status(500).send(err); }
-
-				res.status(201);
-				res.send(user);
-			});
-		//}
-	};
-	/**
-	 * @api {get} /api/user Get list of users
-	 * @apiName Get a list of users
-	 * @apiGroup Users
-	 * @apiDescription
-	 * 		Get list of stored users
-	 * @apiSuccess {Object} list of users
-	 */
-	var get = function (req, res) {
-
-		var query = {};
-
-		if (req.query.firstName) {
-			query.firstName = req.query.firstName;
-		}
-
-		if (req.query.lastName) {
-			query.lastName = req.query.lastName;
-		}
-
-		User.find(query, function (err, userList) {
+		stats.save(function (err, result) {
 			if (err) { res.status(500).send(err); }
 
 			res.status(201);
-			res.send(userList);
+			res.send(result);
+		});
+
+	};
+	/**
+	 * @api {get} /api/user/{UserId}/stats Get list of user stats
+	 * @apiName Get a list of user stats
+	 * @apiGroup Stats
+	 * @apiDescription
+	 * 		Get list of stored users stats
+	 * @apiSuccess {Object} list of users stats
+	 */
+	var get = function (req, res) {
+
+		Stats.find({userID: req.params._id}, function (err, list) {
+			if (err) { res.status(500).send(err); }
+
+			res.status(201);
+			res.send(list);
 		});
 	};
 	/**
@@ -124,10 +110,6 @@ module.exports = function (User) {
 
 	return {
 		post: post,
-		get: get,
-		getById: getById,
-		put: put,
-		patch: patch,
-		remove: remove
+		get: get
 	};
 };
