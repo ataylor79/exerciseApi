@@ -12,6 +12,7 @@ before_install:
   - npm install mocha jshint -g
 
 before_script:
+	- sleep 15
   - mongo ExerciseApp_Test --eval 'db.addUser("testUser", "password");'
 
 
