@@ -38,7 +38,7 @@ describe('Exercise CRUD tests', function () {
 
 	});
 
-	it('should get a single record by ID', function (done) {
+	it('should get a single record by ID from /api/exercise/' + id, function (done) {
 
 		agent
 			.get('/api/exercise/' + id)
