@@ -20,7 +20,7 @@ describe('Exercise CRUD tests', function () {
 			.expect(201)
 			.end(function (err, results) {
 				
-				console.log(err, results)
+				console.log('end function:', err, results)
 				results.body.should.have.property('_id');
 				id = results.body._id;
 				done();
