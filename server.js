@@ -16,6 +16,8 @@ var express 		= require('express'),
 
 var db = (isDev) ? config.dev.mongoDB : config.test.mongoDB;
 
+console.log('mongodb://' + db.user + ':'  + db.password + '@' + db.server + ':' + db.port +  '/' + db.name);
+
 mongoose.connect('mongodb://' + db.user + ':'  + db.password + '@' + db.server + ':' + db.port +  '/' + db.name);
 
 var conn = mongoose.connection;
