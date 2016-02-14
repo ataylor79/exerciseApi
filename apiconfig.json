@@ -13,9 +13,9 @@
 		"mongoDB" : {
 			"user"			: "testUser",
 			"password" 	: "password",
-			"name"			: "exerciseApp_Test",
-			"server" 		: "localhost",
-			"port"  		: "27017"
+			"name"			: "exerciseapp_test",
+			"server" 		: "ds035735.mongolab.com",
+			"port"  		: "35735"
 		}
 	},
 
