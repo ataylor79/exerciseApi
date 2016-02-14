@@ -11,12 +11,19 @@
 
 	"test": {
 		"mongoDB" : {
-			"user"			: "testUser",
-			"password" 	: "password",
-			"name"			: "exerciseapp_test",
-			"server" 		: "ds035735.mongolab.com",
-			"port"  		: "35735"
+			"name"			: "exerciseApp_test",
+			"server" 		: "127.0.0.1",
+			"port"  		: "27017"
 		}
+
+	// "test": {
+	// 	"mongoDB" : {
+	// 		"user"			: "testUser",
+	// 		"password" 	: "password",
+	// 		"name"			: "exerciseapp_test",
+	// 		"server" 		: "ds035735.mongolab.com",
+	// 		"port"  		: "35735"
+	// 	}
 	},
 
 	"defaultPort" 	: "8000",

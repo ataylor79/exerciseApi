@@ -15,8 +15,9 @@ var express 		= require('express'),
 	accessLogStream;
 
 var db = (isDev) ? config.dev.mongoDB : config.test.mongoDB;
+var userCredentials = (db.hasOwnProperty('password')) ? db.user + ':'  + db.password + '@' : '';
 
-console.log('mongodb://' + db.user + ':'  + db.password + '@' + db.server + ':' + db.port +  '/' + db.name);
+console.log('mongodb://' + userCredentials + db.server + ':' + db.port +  '/' + db.name);
 
 mongoose.connect('mongodb://' + db.user + ':'  + db.password + '@' + db.server + ':' + db.port +  '/' + db.name);
 
