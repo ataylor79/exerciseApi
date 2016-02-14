@@ -30,7 +30,7 @@ app.set('port', process.env.PORT || config.defaultPort);
 app.use(bodyParser.urlencoded({ extended: true}));
 app.use(bodyParser.json());
 
-
+/*
 if (!isDev) {
 
 	//Access logging - oh yeahhh
@@ -43,7 +43,7 @@ if (!isDev) {
 		stream: accessLogStream
 	}));
 
-}
+}*/
 
 // add router files
 fs.readdir(config.routerDir, function(err, files){
