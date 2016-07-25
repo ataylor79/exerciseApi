@@ -2,9 +2,8 @@
 node_modules
 
 # caches
-.sass-cache
-.sublime-gulp-cache
-
+*.sass-cache
+*.sublime-*
 
 # exclude merge files
 *.orig
